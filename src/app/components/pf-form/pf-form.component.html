@@ -1,0 +1,170 @@
+<div class="container">
+<form> 
+  <div class="form-row">
+    <div class="form-group col-md-6 col-form-label">
+      <label for="inputEmail4">EMP Code:</label>
+      <input [(ngModel)]="emp_code" name="emp_code" type="text" class="form-control" id="emp_code" placeholder="EMP Code:">
+    </div>
+    <div class="form-group col-md-6 col-form-label">
+      <label for="inputPassword4">Name of the Employee(As per Aadhaar):*</label>
+      <input [(ngModel)]="employee" name="employee" type="text" class="form-control" id="employee" placeholder="Name of the Employee(As per Aadhaar):*">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6 col-form-label">
+      <label for="inputEmail4">Complete Previous Establishment PF No:</label>
+      <input [(ngModel)]="complete_previous_establishment_pf_no" name="complete_previous_establishment_pf_no" type="text" class="form-control" id="complete_previous_establishment_pf_no" placeholder="Complete Previous Establishment PF No:">
+    </div>
+    <div class="form-group col-md-6 col-form-label">
+      <label for="inputPassword4">
+        Aadhaar Number:*</label>
+      <input [(ngModel)]="aadhaar_number" name="aadhaar_number" type="text" class="form-control" id="aadhaar_number" placeholder="Aadhaar Number:*">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-6 form-group ">
+        <label for="input-type " class="col-form-label">Gender:*:</label>
+        <div id="input-type" class="row">
+            <div class="col-sm-6 ">
+                <label class="radio-inline active">
+                    <input [(ngModel)]="gender" name="gender" id="Male" value="Male" type="radio"  checked=""/>Male
+                </label>
+            </div>
+            <div class="col-sm-6 ">
+                <label class="radio-inline">
+                    <input [(ngModel)]="gender" name="gender" id="Female" value="Female" type="radio" />Female
+                </label>
+            </div>
+          </div>
+    </div>
+</div>
+<div class="form-group">
+  <div class="col-sm-6 form-group">
+      <label for="input-type" class="col-form-label">Marital Status:*</label>
+      <div id="input-type" class="row">
+          <div class="col-sm-6 ">
+              <label class="radio-inline">
+                  <input [(ngModel)]="marital_status" name="marital_status" id="Married" value="Married" type="radio" checked="checked" />Married
+              </label>
+          </div>
+          <div class="col-sm-6 ">
+              <label class="radio-inline">
+                  <input [(ngModel)]="marital_status" name="marital_status" id="Unmarried" value="Unmarried" type="radio" />Unmarried
+              </label>
+          </div>
+        </div>
+  </div>
+</div>
+<div class="form-row">
+  <div class="form-group col-md-6 col-form-label">
+    <label for="inputEmail4">Date of birth:*</label>
+    <input [(ngModel)]="DOB" name="DOB" type="date" class="form-control" id="DOB" placeholder="Date of birth:">
+  </div>
+  <div class="form-group col-md-6 col-form-label">
+    <label for="inputPassword4">
+      Date of Joining:*</label>
+    <input [(ngModel)]="date_of_joining" name="date_of_joining" type="date" class="form-control" id="date_of_joining" placeholder="Date of Joining:*">
+  </div>
+</div>
+<div class="form-row">
+  <div class="form-group col-md-6 col-form-label">
+    <label for="inputEmail4">Father/Husband Name:*</label>
+    <input [(ngModel)]="father_or_husband_name" name="father_or_husband_name" type="text" class="form-control" id="father_or_husband_name" placeholder="Father/Husband Name:*">
+  </div>
+  <div class="form-group col-md-6 col-form-label">
+    <label for="inputPassword4">UAN No. from previous Employment(IF ANY):</label>
+    <input  [(ngModel)]="UAN_no_from_previous_employement_if_any" name="UAN_no_from_previous_employement_if_any" type="text" class="form-control" id="UAN_no_from_previous_employement_if_any" placeholder="UAN No. from previous Employment(IF ANY):">
+  </div>
+</div>
+<div class="form-group">
+  <div class="col-sm-6 ">
+      <label for="input-type" class="col-form-label">Relationship with the member (Father/Husband):*</label>
+      <div id="input-type" class="row">
+          <div class="col-sm-6 ">
+              <label class="radio-inline">
+                  <input [(ngModel)]="relationship" name="relationship" id="Student" value="Father" type="radio" checked="checked"/>Father
+              </label>
+          </div>
+          <div class="col-sm-6 ">
+              <label class="radio-inline">
+                  <input [(ngModel)]="relationship" name="relationship" id="Tutor" value="Husband" type="radio" />Husband
+              </label>
+          </div>
+        </div>
+  </div>
+</div>
+<div class="form-group ">
+<div class="col-sm-6 form-group">
+    <label for="input-type" class="col-form-label">Qualification(PUC, Graduate, PG,Phd):*</label>
+    <div id="input-type" class="row">
+        <div class="col-sm-3 ">
+            <label class="radio-inline">
+                <input [(ngModel)]="qualification" checked="checked" name="qualification" id="PUC" value="PUC" type="radio" />PUC
+            </label>
+        </div>
+        <div class="col-sm-3 ">
+            <label class="radio-inline">
+                <input [(ngModel)]="qualification" name="qualification" id="Graduate" value="Graduate" type="radio" />Graduate
+            </label>
+        </div>
+        <div class="col-sm-3 ">
+          <label class="radio-inline">
+              <input [(ngModel)]="qualification" name="qualification" id="PG" value="PG" type="radio" />PG
+          </label>
+      </div>
+      <div class="col-sm-3 ">
+          <label class="radio-inline">
+              <input [(ngModel)]="qualification" name="qualification" id="PHD" value="PHD" type="radio" />PHD
+          </label>
+      </div>
+      </div>
+</div>
+</div>
+
+<div class="form-row" >
+  <div class="form-group col-md-6 col-form-label">
+    <label for="inputEmail4">Actual Monthly Gross Salary:*</label>
+    <input [(ngModel)]="actual_monthly_gross_salary" name="actual_monthly_gross_salary" type="text" class="form-control" id="actual_monthly_gross_salary" placeholder="Actual Monthly Gross Salary:*">
+  </div>
+  <div class="form-group col-md-6 col-form-label">
+    <label for="actual_monthly_basic_DA">Actual Monthly Basic & DA:*</label>
+    <input [(ngModel)]="actual_monthly_basic_DA" name="actual_monthly_basic_DA" type="text" class="form-control" id="actual_monthly_basic_DA" placeholder="Actual Monthly Basic & DA:*">
+  </div>
+</div>
+<div class="form-row" >
+  <div class="form-group col-md-6 col-form-label">
+    <label for="back_account_number">
+      Bank A/c Number:*</label>
+    <input [(ngModel)]="back_account_number" name="back_account_number" type="text" class="form-control" id="back_account_number" placeholder="
+    Bank A/c Number:*">
+  </div>
+  <div class="form-group col-md-6 col-form-label">
+    <label for="IFSC_CODE">IFSC Code:*</label>
+    <input [(ngModel)]="IFSC_CODE" name="IFSC_CODE" type="text" class="form-control" id="IFSC_CODE" placeholder="IFSC Code:*">
+  </div>
+</div>
+<!-- <div class="form-group">
+  <div class="col-sm-6 form-group">
+      <label for="input-type" class="col-form-label">Marital Status:*</label>
+      <div id="input-type" class="row">
+          <div class="col-sm-6 ">
+              <label class="radio-inline">
+                  <input name="account_type" id="input-type-student" value="Student" type="radio" />Married
+              </label>
+          </div>
+          <div class="col-sm-6 ">
+              <label class="radio-inline">
+                  <input name="account_type" id="input-type-tutor" value="Tutor" type="radio" />Unmarried
+              </label>
+          </div>
+        </div>
+  </div>
+</div> -->
+<div class="form-group">
+  <div class="col-sm-6 form-group">
+      <a  class="nav-item signup-button" tooltip="before clicking send email please fill all the inputs and proceed" placeholder="top" (click)="onSendEmailClicked()">Send Email</a>
+  </div>
+</div>
+<app-spinner *ngIf="loading"></app-spinner>
+</form>
+</div>

@@ -1,0 +1,146 @@
+
+
+<div class="container">
+  <form>
+    <div class="form-row">
+      <div class="form-group col-md-6 col-form-label">
+        <label for="inputEmail4">Serial Number:</label>
+        <input type="text" [(ngModel)]="serial_Number" name="serial_Number" class="form-control" id="serial_Number" placeholder="Serial Number:">
+      </div>
+      <div class="form-group col-md-6 col-form-label">
+        <label for="employee_id">Employee ID:*</label>
+        <input type="text" [(ngModel)]="employee_id" name="employee_id" class="form-control" id="employee_id" placeholder="Employee ID:*">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6 col-form-label">
+        <label for="inputEmail4">Employee Name as per Aadhar Card*:</label>
+        <input type="text"  [(ngModel)]="employee" name="employee" class="form-control" id="employee" placeholder="Employee Name as per Aadhar Card*:Complete Previous Establishment PF No:">
+      </div>
+      <div class="form-group col-md-6 col-form-label">
+        <label for="contact_number">
+          Contact Number*</label>
+        <input type="text"  [(ngModel)]="contact_number" name="contact_number" class="form-control" id="contact_number" placeholder="Contact Number*">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-6 form-group ">
+          <label for="gender " class="col-form-label">Gender:*:</label>
+          <div id="input-type" class="row">
+              <div class="col-sm-6 ">
+                  <label class="radio-inline">
+                      <input  [(ngModel)]="gender"  name="gender" id="Male" value="Male" type="radio" />Male
+                  </label>
+              </div>
+              <div class="col-sm-6 ">
+                  <label class="radio-inline">
+                      <input  [(ngModel)]="gender"  name="gender" id="Female" value="Female" type="radio" />Female
+                  </label>
+              </div>
+            </div>
+      </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-6 form-group">
+        <label for="marital_status" class="col-form-label">Marital Status:*</label>
+        <div id="marital_status" class="row">
+            <div class="col-sm-6 ">
+                <label class="radio-inline">
+                    <input  [(ngModel)]="marital_status"  name="marital_status" id="Married" value="Married" type="radio" />Married
+                </label>
+            </div>
+            <div class="col-sm-6 ">
+                <label class="radio-inline">
+                    <input  [(ngModel)]="marital_status"  name="marital_status" id="Unmarried" value="Unmarried" type="radio" />Unmarried
+                </label>
+            </div>
+          </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6 col-form-label">
+      <label for="DOB">Date of birth(self):*</label>
+      <input type="date"  [(ngModel)]="DOB" name="DOB" class="form-control" id="DOB" placeholder="Date of birth:">
+    </div>
+    <div class="form-group col-md-6 col-form-label">
+      <label for="date_of_joining">
+        Date of Joining:*</label>
+      <input type="date"  [(ngModel)]="date_of_joining" name="date_of_joining" class="form-control" id="date_of_joining" placeholder="Date of Joining:*">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6 col-form-label">
+      <label for="father_name">Father's Name:*</label>
+      <input type="text"  [(ngModel)]="father_name" name="father_name" class="form-control" id="father_name" placeholder="Father's Name:*">
+    </div>
+    <div class="form-group col-md-6 col-form-label">
+      <label for="DOB_father">DOB(Father):*</label>
+      <input type="date"  [(ngModel)]="DOB_father" name="DOB_father" class="form-control" id="DOB_father" placeholder="DOB(Father):*">
+    </div>
+  </div>  
+  <div class="form-row" >
+    <div class="form-group col-md-6 col-form-label">
+      <label for="mother_name">Mother's Name:*</label>
+      <input type="text"  [(ngModel)]="mother_name" name="mother_name" class="form-control" id="mother_name" placeholder="Mother's Name:*">
+    </div>
+    <div class="form-group col-md-6 col-form-label">
+      <label for="DOB_mother">DOB(Mother):*</label>
+      <input type="date"  [(ngModel)]="DOB_mother" name="DOB_mother" class="form-control" id="DOB_mother" placeholder="DOB(Mother):*">
+    </div>
+  </div>
+  <div class="form-row" >
+    <div class="form-group col-md-6 col-form-label">
+      <label for="spouse_name">
+        Spouse's Name:</label>
+      <input type="text"  [(ngModel)]="spouse_name" name="spouse_name" class="form-control" id="spouse_name" placeholder="Spouse's Name:">
+    </div>
+    <div class="form-group col-md-6 col-form-label">
+      <label for="DOB_spouse">DOB(spouse):</label>
+      <input type="date"  [(ngModel)]="DOB_spouse" name="DOB_spouse" class="form-control" id="DOB_spouse" placeholder="DOB(spouse):">
+    </div>
+  </div>
+  <div class="form-row" >
+    <div class="form-group col-md-6 col-form-label">
+      <label for="aadhar_card_number">
+        Aadhar Card Number*:</label>
+      <input type="text"  [(ngModel)]="aadhar_card_number" name="aadhar_card_number" class="form-control" id="aadhar_card_number" placeholder="Aadhar Card Number*:">
+    </div>
+    <div class="form-group col-md-6 col-form-label">
+      <label for="pan_card_number">PAN Card Number*:</label>
+      <input type="text"  [(ngModel)]="pan_card_number" name="pan_card_number" class="form-control" id="pan_card_number" placeholder="PAN Card Number*:">
+    </div>
+  </div>
+  <div class="form-row" >
+    <div class="form-group col-md-6 col-form-label">
+      <label for="back_account_number">
+        Bank A/c Number:*</label>
+      <input type="text"  [(ngModel)]="back_account_number" name="back_account_number" class="form-control" id="back_account_number" placeholder="Bank A/c Number:*">
+    </div>
+    <div class="form-group col-md-6 col-form-label">
+      <label for="IFSC_CODE">IFSC Code:*</label>
+      <input type="text"  [(ngModel)]="IFSC_CODE" name="IFSC_CODE" class="form-control" id="IFSC_CODE" placeholder="IFSC Code:*">
+    </div>
+  </div>
+  <div class="form-row" >
+    <div class="form-group col-md-6 col-form-label">
+      <label for="bank_name">
+        Bank Name*:</label>
+      <input type="text"  [(ngModel)]="bank_name" name="bank_name" class="form-control" id="bank_name" placeholder="
+      Bank Name*:">
+    </div>
+    <div class="form-group col-md-6 col-form-label">
+      <label for="branch_name">Branch Name:*</label>
+      <input type="text"  [(ngModel)]="branch_name" name="branch_name" class="form-control" id="branch_name" placeholder="Branch Name:*">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-6 form-group">
+        <a  class="nav-item signup-button" (click)="onSendEmailClicked()">Send Email</a>
+       
+    </div>
+  </div>
+  <app-spinner *ngIf="loading"></app-spinner>
+  </form>
+  
+  </div>
+  

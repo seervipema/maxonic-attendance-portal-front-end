@@ -1,0 +1,51 @@
+<div class="form-row">
+  <div class="form-group col-md-6 col-form-label">
+    <label for="event4">Event Name:</label>
+    <input type="text" class="form-control" id="event-name" placeholder="Event Name" name="event-name" [(ngModel)]="eventName" (ngModelChange)="onEventNameChanged()"> 
+    <div class="col-form-label forsignUpmessage" *ngIf="isEventNameEmpty">{{eventNameMessage}}</div>
+     
+  </div>
+  <div class="form-group col-md-6 col-form-label">
+    <label for="dateOfEvent">Date of Event:*</label>
+    <input type="date" class="form-control" id="dateOfEvent" placeholder="Date of Event:" name="dateOfEvent" [(ngModel)]="eventDate" (ngModelChange)="onEventDateChanged()">
+    <div class="col-form-label forsignUpmessage" *ngIf="isDateOfEventEmpty">{{dateOfEventMessage}}</div>
+  </div>
+</div>
+<div class="form-row">
+  <div class="form-group col-md-6 col-form-label">
+    <label for="event4">Event Description:</label>
+    <textarea class="form-control" id="eventDescription" rows="3" name="eventDescription" [(ngModel)]="eventDescription" (ngModelChange)="onEventDescriptionChanged()"></textarea>
+    <div class="col-form-label forsignUpmessage" *ngIf="isEventDescriptionEmpty">{{eventDescriptionMessage}}</div>
+  </div>
+</div>
+<div class="form-row">
+  <div class="form-group" >
+    <div class="col-sm-6 form-group " style="margin-top: 16px;">
+        <a  class="nav-item signup-button" (click)="onCreateEventClicked()">Create Event</a>
+        <div class="col-form-label forsignUpmessage" *ngIf="isEventCreationResponseEmpty">{{eventCreationResponseMessage}}</div>
+    </div>
+  </div>
+</div>
+<div class="forTable">
+  <table   class="table table-hover">
+    <thead>
+      <tr class="forRow">
+        <th scope="col">Event Date</th>
+        <th scope="col">Event Name</th>
+        <th scope="col">Event Description</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor ="let one of createdEventList">
+       
+        <td class="forTd">{{one.event_date }}</td>
+        <td class="forTd">{{one.event_name}}</td>
+        <td class="forTd">{{one.event_description}}</td>
+        <td  class="forTd"><button class="nav-item login_button" style="margin-top: 0;margin-right: 0;" (click)="OnDeleteClicked(one.event_date)">Delete</button></td>
+        </tr>
+    </tbody>
+    </table>
+</div>
+
+

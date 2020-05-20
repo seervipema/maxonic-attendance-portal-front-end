@@ -1,0 +1,9 @@
+{
+    "sliderArray":[
+     {"img": "http://bloquo.cc/img/works/1.jpg", "alt": "", "text": "You can Check-In Or Check-Out"},
+     {"img": "http://bloquo.cc/img/works/2.jpg", "alt": "",  "text": "You can see your past attendance history "},
+     {"img": "http://bloquo.cc/img/works/3.jpg", "alt": "", "text": "You can do company related formalities"},
+     {"img": "http://bloquo.cc/img/works/4.jpg", "alt": "",  "text": "You can see and fill TimeSheet"},
+     {"img": "http://bloquo.cc/img/works/12.jpg", "alt": "", "text": "You can change your profile related things"}
+    ]
+}

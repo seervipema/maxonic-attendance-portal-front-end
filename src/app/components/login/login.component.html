@@ -1,0 +1,75 @@
+<div  id="exampleModal" tabindex="-1" role="dialog"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Enter your details</h5>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Email:</label>
+            <input   [(ngModel)]="email" ngModel #email1="ngModel"  pattern="[a-z0-9._%+-]+@(maxonic\.com)$" name="email1" type="text" class="form-control" id="email" placeholder="name@maxonic.com"    (ngModelChange)="onLoginEmailChanged()" >
+            <label id="loginEmail" *ngIf="isLoginpEmailEmpty" for="message-text" class="col-form-label-confirm-password">{{LoginLabelMessage}}</label>
+            <div *ngIf="email1.errors &&(email1.touched || email1.dirty)" class ="aler alert-danger">
+             <div [hidden]="!email1.errors?.pattern">
+               Invalid pattern email should be name@maxonic.com type
+             </div> 
+            </div>
+           </div>
+          <div class="form-group ">
+            <label   for="message-text" class="col-form-label">Password:</label>
+            <div class="row">
+              <div class="col-xs-10 col-sm-10" style="padding-right:0%">
+                  <input [(ngModel)]="password" name="password" type="password" class="form-control" id="password" (ngModelChange)="onLoginPasswordChanged()">
+              </div>
+              <div  class="col-xs-10 col-sm-2 forShowpassDiv" (click)="onEyeIconClick()">
+                  <div class="input-group-append">
+                      <span *ngIf="isToggled" class="input-group-text" id="basic-addon2"><i class="fa fa-eye fa-lg"></i></span>
+                      <span *ngIf="!isToggled" class="input-group-text" id="basic-addon2"><i class="fa fa-eye-slash fa-lg"></i></span>
+                   
+                    </div>
+              </div>
+            </div>
+            <label id="loginPassword" *ngIf="isLoginpPasswordEmpty" for="message-text" class="col-form-label-confirm-password">{{LoginPasswordLabelMessage}}</label>
+
+          </div>
+         
+        </form>
+      </div>
+      <div class="modal-footer">
+         <!-- <div id="forgetPassword"  for="message-text" class="col-form-label-forgot-password">Forgot Password?</div> -->
+        <button type="button" id="forgot-password" class="btn btn-secondary" (click)="onForgotPasswordClicked()">Forgot Password?</button>
+        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+         <span tooltip="Before clicking Login you should write all inputs then procced" placement="right" style="margin-left: 1%;">
+          <button type="button" class="btn btn-primary"  (click)="OnLoginClicked()">Login</button>
+         </span>
+        <app-spinner *ngIf="loading"></app-spinner>
+        <!-- <div class="col-form-label forsignUpmessage" *ngIf="isLoginLoadingMessage">{{LoginLoadingMessage}}</div> -->
+      </div>
+      <div *ngIf="isForgotPasswordClicked" style="display: flex;justify-content: center;"><h5 class="modal-title" style="color: #10847e;">Please write email where coupon code will be send</h5></div>
+      <div *ngIf="isForgotPasswordClicked" class="modal-body" style="padding-top: 0;">
+         <form>
+           <div class="form-group">
+             <label for="recipient-name" class="col-form-label">Email </label>
+             <input [(ngModel)]="forgotEmail" ngModel #forgotEmail1="ngModel"  pattern="[a-z0-9._%+-]+@(maxonic\.com)" name="forgotEmail1" type="text" class="form-control" id="forgotEmail" placeholder="name@maxonic.com"    (ngModelChange)="onLoginForgotEmailChanged()" >
+             <label id="loginForgotEmail" *ngIf="isLoginForgotEmailEmpty" for="message-text" class="col-form-label-confirm-password">{{loginForgotEmailMessage}}</label>
+             <div *ngIf="forgotEmail1.errors &&(forgotEmail1.touched || forgotEmail1.dirty)" class ="aler alert-danger">
+               <div [hidden]="!forgotEmail1.errors?.pattern">
+                 Invalid pattern email should be name@maxonic.com type 
+               </div> 
+              </div> 
+           </div>
+         </form>
+       </div>
+       <div *ngIf="isForgotPasswordClicked"  class="modal-footer">
+           <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+           <app-spinner *ngIf="forgotLoading"></app-spinner>
+          <span tooltip="Before clicking Send Email you should write your email than proceed" placement="top">
+          <button type="button" [disabled]="isEmailInputEmpty" class="btn btn-primary"  (click)="OnLoginSendEmailClicked()">Send Email</button>
+          </span>
+          <!-- <div class="col-form-label forsignUpmessage" *ngIf="isSendEmailLoadingMessage">{{SendEmailLoadingMessage}}</div> -->
+        </div>
+    </div>
+  </div>
+</div>
+

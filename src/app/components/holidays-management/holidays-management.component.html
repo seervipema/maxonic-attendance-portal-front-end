@@ -1,0 +1,86 @@
+<div style="margin-bottom: 2rem;"  >
+  <a id="check_in" class="nav-item login_button" data-toggle="modal" data-target="#AddHoliday" >Add Holiday</a>
+  <a id="check_out" class="nav-item right signup-button" data-toggle="modal" data-target="#deleteModal" >Delete Holiday</a>
+</div>
+<div class="modal fade" id="AddHoliday" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLabel">Enter Holiday Details</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Holiday occasion:</label>
+            <input [(ngModel)]="holidayOccasion" (ngModelChange)="OnHolidayOccasionChanged()" name="holidayOccasion" type="text" class="form-control" id="holidayOccasion" placeholder="Example:Diwali "  >
+            <label id="holidayOccasionMessage" *ngIf="isHolidayOccasionMessage" for="message-text" class="col-form-label-confirm-password">{{holidayOccasionMessage}}</label>
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Date of Holiday:</label>
+            <input type="date" class="form-control" (ngModelChange)="onHolidayDayChanged()" name="dateOfHoliday" id="dateOfHoliday" placeholder="dd-mm-yyyy" [(ngModel)]="dateOfHoliday" >
+            <label id="dateOfHolidayMessage" *ngIf="isDateOfHolidayMessage" for="message-text" class="col-form-label-confirm-password">{{dateOfHolidayMessage}}</label>
+           </div>
+           
+            <div class="form-group">
+                      <label class="radio-inline col-form-label">
+                          <input name="account_type" id="input-type-student" value="Student" type="radio" (change)="onMandatoryClicked()" />Mandatory
+                      </label>
+                      <label class="radio-inline col-form-label">
+                          <input name="account_type" id="input-type-tutor" value="Tutor" type="radio" (change)="onOptionalClicked()"  />Optional
+                      </label>
+          </div>
+          
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="onCreateHolidayClicked()">Create Holiday</button>
+        <app-spinner *ngIf="holidayLoading"></app-spinner>
+        <div class="col-form-label forsignUpmessage" *ngIf="signUpLoadingMessage">{{message}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div  class="modal fade" id="deleteModal" tabindex="-1" role="dialog"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Enter Date of holiday</h5>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Date:</label>
+            <input [(ngModel)]="date_of_holiday" name="email" type="date" class="form-control" id="Date"  placeholder="dd-mm-yyyy"   (ngModelChange)="onDeleteHolidayDateChanged()" >
+            <label id="deleteHolidayDate" *ngIf="isDeleteHolidayDateEmpty" for="message-text" class="col-form-label-confirm-password">{{deleteHolidayDateResponse}}</label>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary"  (click)="onDeleteHolidayDateCliked()">Delete Holiday</button>
+        <app-spinner *ngIf="deleteHolidayloading"></app-spinner>
+        <div class="col-form-label forsignUpmessage" *ngIf="isDeleteHolidayDateLoadingMessage">{{deleteHolidayDateMessage}}</div>
+      </div>  
+    </div>
+  </div>
+</div>
+<div class="forTable">
+  <table  *ngIf="!loading" class="table table-hover">
+    <thead>
+      <tr class="forRow">
+        <th scope="col">Date</th>
+        <th scope="col">Holiday Occasion</th>
+        <th scope="col">Optional</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor ="let one of allHolidayResults">
+       
+        <td class="forTd">{{one.holiday_date }}</td>
+        <td class="forTd">{{one.holiday_occasion}}</td>
+        <td class="forTd">{{one.is_optional}}</td>
+        </tr>
+    </tbody>
+    </table>
+</div>

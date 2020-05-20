@@ -1,0 +1,288 @@
+<nav *ngIf="isLoggedIn && !isAdminLoggedIn " class="navbar  sticky-top" role="navigation" style="z-index: 2;">
+
+  <div class="container">
+
+    <div class="navbar-header  navbar-inverse" style="background: inherit;">
+      <a><img class="logo-img" src="../assets/images/Logo.png"></a>
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar_after_login"
+        aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+    </div>
+    <div id="navbar_after_login" class="navbar-collapse collapse">
+
+      <!-- <ul class="nav navbar-nav navbar navbar-left">
+        <li>
+            <img class="logo-img" src="../assets/images/Logo.png"> 
+         </li>
+     </ul> -->
+      <ul class="nav navbar-nav">
+        <!-- <li class="active"><a class="login_button"  href="index.html"><span class="glyphicon glyphicon-home " aria-hidden="true"></span> Home</a></li> -->
+        <!-- <li>
+        <img class="logo-img" src="../assets/images/Logo.png"> 
+     </li> -->
+        <li> <a (click)="onAttendanceClicked()" class="nav-item signup-button">Attendance</a></li>
+        <li class="dropdown">
+          <a href="index.html" class="dropdown-toggle login_button" data-toggle="dropdown" role="button"
+            aria-haspopup="true" aria-expanded="false">
+            More options <span class="caret"></span></a>
+          <div class="dropdown-menu">
+        <li><a class="dropdown-item dropdown_button" (click)="onPdfClicked()">Employee HandBook</a></li>
+        <li><a class="dropdown-item dropdown_button" (click)="OnTimesheetClicked()">Timesheet</a></li>
+        <li><a class="dropdown-item dropdown_button" (click)="OnHrFormalitiesClicked()">HR Formalities</a></li>
+        <li><a class="dropdown-item dropdown_button" (click)="onPfFormClicked()">PF Account</a></li>
+        <li><a class="dropdown-item dropdown_button" (click)="onEsiFormClicked()">ESI Form</a></li>
+    </div>
+    </li>
+    <!-- [routerLink]="['/pf-form']" -->
+    <!-- [routerLink]="['/esi-form']
+     [routerLink]="['/hr-formalities']
+     [routerLink]="['/timesheet']
+     [routerLink]="['/pdf']
+     [routerLink]="['/attendance']"
+    -->
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <!-- <li>  <a class="login_button" data-toggle="modal" data-target="#exampleModal">Login </a>
+   </li> -->
+      <li class="dropdown">
+        <a href="index.html" class="dropdown-toggle login_button" data-toggle="dropdown" role="button"
+          aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-user" aria-hidden="true"></i>Profile <span class="caret"></span></a>
+        <div class="dropdown-menu">
+          <!-- <li><a class="dropdown-item dropdown_button " (click)="onResignationClicked()">Resignation Request</a></li> -->
+          <!-- [routerLink]="['/resignation']" -->
+      <li><a class="dropdown-item dropdown_button" (click)="onResetPasswordClicked()">Reset Password</a></li>
+      <li><a class="dropdown-item dropdown_button" (click)="onSignOutClicked()" [routerLink]="['/']">Sign Out</a></li>
+  </div>
+  </li>
+  <!-- <li>   <a class="signup-button " data-toggle="modal" data-target="#exampleModalForSignUp"><i class="fa fa-user" aria-hidden="true"></i>Profile </a></li>
+  -->
+
+
+
+  </ul>
+
+
+  </div>
+  </div>
+</nav>
+<nav *ngIf="!isLoggedIn" class="navbar  sticky-top" role="navigation" style="z-index: 2;">
+
+  <div class="container">
+    <div class="navbar-header navbar-inverse" style="background: inherit;">
+      <a><img class="logo-img" src="../assets/images/Logo.png"></a>
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+        aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li> <a class="login_button" style="z-index: 2;" (click)="onNavBarLoginClicked()">Login </a>
+        </li>
+        <li> <a class="signup-button" (click)="onNavBarSignUpClicked()" style="z-index: 2;">Signup </a></li>
+        <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Enter your details</h5>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Email:</label>
+                    <input [(ngModel)]="email" name="email" type="text" class="form-control" id="email"
+                      placeholder="name@maxonic.com" (ngModelChange)="onLoginEmailChanged()">
+                    <label id="loginEmail" *ngIf="isLoginpEmailEmpty" for="message-text"
+                      class="col-form-label-confirm-password">{{LoginLabelMessage}}</label>
+                  </div>
+                  <div class="form-group ">
+                    <label for="message-text" class="col-form-label">Password:</label>
+                    <div class="row">
+                      <div class="col-xs-10 col-sm-10" style="padding-right:0%">
+                        <input [(ngModel)]="password" name="password" type="password" class="form-control" id="password"
+                          (ngModelChange)="onLoginPasswordChanged()">
+                      </div>
+                      <div class="col-xs-10 col-sm-2 forShowpassDiv" (click)="onEyeIconClick()">
+                        <div class="input-group-append">
+                          <span *ngIf="isToggled" class="input-group-text" id="basic-addon2"><i
+                              class="fa fa-eye fa-lg"></i></span>
+                          <span *ngIf="!isToggled" class="input-group-text" id="basic-addon2"><i
+                              class="fa fa-eye-slash fa-lg"></i></span>
+
+                        </div>
+                      </div>
+                    </div>
+                    <label id="loginPassword" *ngIf="isLoginpPasswordEmpty" for="message-text"
+                      class="col-form-label-confirm-password">{{LoginPasswordLabelMessage}}</label>
+
+                  </div>
+
+                </form>
+              </div>
+              <div class="modal-footer">
+
+                <button type="button" id="forgot-password" class="btn btn-secondary"
+                  (click)="onForgotPasswordClicked()">Forgot Password?</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" (click)="OnLoginClicked()">Login</button>
+                <app-spinner *ngIf="loading"></app-spinner>
+                <div class="col-form-label forsignUpmessage" *ngIf="isLoginLoadingMessage">{{LoginLoadingMessage}}</div>
+              </div>
+              <div *ngIf="isForgotPasswordClicked" style="display: flex;justify-content: center;">
+                <h5 class="modal-title" style="color: #10847e;">Please write email where coupon code will be send</h5>
+              </div>
+              <div *ngIf="isForgotPasswordClicked" class="modal-body" style="padding-top: 0;">
+                <form>
+                  <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Email </label>
+                    <input [(ngModel)]="forgotEmail" name="forgotEmail" type="text" class="form-control"
+                      id="forgotEmail" placeholder="name@maxonic.com" (ngModelChange)="onLoginForgotEmailChanged()">
+                    <label id="loginForgotEmail" *ngIf="isLoginForgotEmailEmpty" for="message-text"
+                      class="col-form-label-confirm-password">{{loginForgotEmailMessage}}</label>
+                  </div>
+                </form>
+              </div>
+              <div *ngIf="isForgotPasswordClicked" class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" (click)="OnLoginSendEmailClicked()">Send Email</button>
+                <app-spinner *ngIf="forgotLoading"></app-spinner>
+                <div class="col-form-label forsignUpmessage" *ngIf="isSendEmailLoadingMessage">
+                  {{SendEmailLoadingMessage}}</div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+        <!-- <div class="modal fade" id="exampleModalForSignUp" tabindex="-1" role="dialog"
+          aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">Enter your details</h4>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Email:</label>
+                    <input [(ngModel)]="signUpEmail" (ngModelChange)="OnEmailTextChanged()" name="signUpEmail"
+                      type="text" class="form-control" id="signUpEmail" placeholder="name@maxonic.com">
+                    <label id="SignUpPasswordEmail" *ngIf="isSignUpEmailEmpty" for="message-text"
+                      class="col-form-label-confirm-password">{{SignEmailMessage}}</label>
+                  </div>
+                  <div class="form-group ">
+                    <label for="message-text" class="col-form-label">Password:</label>
+                    <div class="row">
+                      <div class="col-xs-10 col-sm-10" style="padding-right:0%">
+                        <input type="password" class="form-control" id="signUpPassword" name="signUpPassword"
+                          [(ngModel)]="signUpPassword" (ngModelChange)="onSignUpPasswordChanged()">
+                      </div>
+                      <div class="col-xs-10 col-sm-2 forShowpassDiv" (click)="onSignUpPasswordEyeIconClick()">
+                        <div class="input-group-append">
+                          <span *ngIf="issignUpPasswordToggled" class="input-group-text" id="basic-addon2"><i
+                              class="fa fa-eye fa-lg"></i></span>
+                          <span *ngIf="!issignUpPasswordToggled" class="input-group-text" id="basic-addon2"><i
+                              class="fa fa-eye-slash fa-lg"></i></span>
+                        </div>
+                      </div>
+                    </div>
+                    <label id="SignUpPasswordMessage" *ngIf="isSignUpPasswordEmpty" for="message-text"
+                      class="col-form-label-confirm-password">{{SignPasswordMessage}}</label>
+                  </div>
+                  <div class="form-group ">
+                    <label for="message-text" class="col-form-label">Confirm Password:</label>
+                    <div class="row">
+                      <div class="col-xs-10 col-sm-10" style="padding-right:0%">
+                        <input type="password" [(ngModel)]="confirmPassword" name="confirmPassword" class="form-control"
+                          id="Confirmpassword" (ngModelChange)="onPasswordChanged()">
+                      </div>
+                      <div class="col-xs-10 col-sm-2 forShowpassDiv" (click)="onConfirmPassEyeIconClick()">
+                        <div class="input-group-append">
+                          <span *ngIf="isSignUpConfirmPassToggled" class="input-group-text" id="basic-addon2"><i
+                              class="fa fa-eye fa-lg"></i></span>
+                          <span *ngIf="!isSignUpConfirmPassToggled" class="input-group-text" id="basic-addon2"><i
+                              class="fa fa-eye-slash fa-lg"></i></span>
+
+                        </div>
+                      </div>
+                    </div>
+                    <label id="confirmPasswordMessage" *ngIf="isConfirmPasswordMatched" for="message-text"
+                      class="col-form-label-confirm-password">{{confirmPasswordMessage}}</label>
+                  </div>
+                  <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Date of Birth:</label>
+                    <input type="date" class="form-control" (ngModelChange)="OnSignUpDobChanged()" name="signUpDOB"
+                      id="signUpDOB" placeholder="dd-mm-yyyy" [(ngModel)]="signUpDOB">
+                    <label id="SignUpDobMessage" *ngIf="isSignUpDOBEmpty" for="message-text"
+                      class="col-form-label-confirm-password">{{SignUpDOBMessage}}</label>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" (click)="onSubmitCliked()">Submit</button>
+                <app-spinner *ngIf="signUpLoading"></app-spinner>
+                <div class="col-form-label forsignUpmessage" *ngIf="signUpLoadingMessage">{{message}}</div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- <div #slidercontainer style="z-index: 1;"></div> -->
+<nav *ngIf="isLoggedIn && isAdminLoggedIn" class="navbar  sticky-top" role="navigation" style="z-index: 2;">
+
+  <div class="container">
+
+    <div class="navbar-header  navbar-inverse" style="background: inherit;">
+      <a><img class="logo-img" src="../assets/images/Logo.png"></a>
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar_after_login"
+        aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+    </div>
+    <div id="navbar_after_login" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li> <a (click)="onAttendanceClicked()" class="nav-item signup-button">Attendance</a></li>
+        <li class="dropdown">
+          <a href="index.html" class="dropdown-toggle login_button" data-toggle="dropdown" role="button"
+            aria-haspopup="true" aria-expanded="false">
+            More options <span class="caret"></span></a>
+          <div class="dropdown-menu">
+        <li><a class="dropdown-item dropdown_button" (click)="onUserManagementClicked()">User Management</a></li>
+        <li><a class="dropdown-item dropdown_button" (click)="OnCreateEventClicked()">Create Event</a></li>
+        <li><a class="dropdown-item dropdown_button" (click)="OnHolidaysManagementClicked()">Holidays Management</a>
+        </li>
+    </div>
+    </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="index.html" class="dropdown-toggle login_button" data-toggle="dropdown" role="button"
+          aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-user" aria-hidden="true"></i>Profile <span class="caret"></span></a>
+        <div class="dropdown-menu">
+          <!-- <li><a class="dropdown-item dropdown_button " (click)="onResignationClicked()">Resignation Request</a></li> -->
+      <li><a class="dropdown-item dropdown_button" (click)="onResetPasswordClicked()">Reset Password</a></li>
+      <li><a class="dropdown-item dropdown_button" (click)="onSignOutClicked()" [routerLink]="['/']">Sign Out</a></li>
+  </div>
+  </li>
+  </ul>
+  </div>
+  </div>
+</nav>

@@ -1,0 +1,139 @@
+<div id="container">
+  <app-spinner *ngIf="loading"></app-spinner>
+<div class="forLogo" style=" display: flex;justify-content: center;">
+  <img class="logo-img" style=" display: flex;justify-content: center;" src="../assets/images/Logo.png"> 
+</div>
+<div class="forLogo" style=" display: flex;justify-content: center;">
+  <p class="forTitle" style=" font-family: Arial;font-weight: bold;text-align: center;margin-top: 3%;font-size: 1.5rem;">EMPLOYEE TIMESHEET</p>
+</div>
+
+<div  class="container" style="padding: 10%;padding-top: 0%;">
+   <div class="forContainerRow" style="margin-top: 2%;"> 
+       <span class="forText" style="font: 500 14px/16px 'Roboto',sans-serif;font-size: 1.5rem;font-weight: 600;">Email</span>
+       <span class="forTextValue" style=" margin-left: 2%;font-size: 1.5rem;font-weight: 500;">{{paramEmail}}</span>
+   </div>
+   <div class="forContainerRow">
+       <span class="forText" style="font: 500 14px/16px 'Roboto',sans-serif;font-size: 1.5rem;font-weight: 600;">REPORTING PERIOD</span>
+       <span class="forTextValue" style=" margin-left: 2%;font-size: 1.5rem;font-weight: 500;">{{firstDayOfMonth}} to {{lastDayOfMonth}}</span>
+   </div>
+   <table class="doc_table" style="border-collapse: collapse;border-spacing: 0;font-size: 90%;line-height: 18px;table-layout: fixed;width: 100%;font-family: Arial,Helvetica,sans-serif;"> 
+     <thead>
+       <tr>
+         <th>Days</th>
+         <th *ngFor="let d of allDaysWithdateOfFirstWeek">{{d.day}}</th>
+         <th>TOTAL</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr >
+         <td>Date</td>
+         <td *ngFor="let d of allDaysWithdateOfFirstWeek">{{d.date}}</td>
+       </tr>
+       <tr >
+         <td></td>
+         <td *ngFor="let d of allDaysWithdateOfFirstWeek" ><span >
+           <input [readonly]="!editable" class="input_ui" id={{d.date}} style="border:1px solid rgba(89, 182, 113, 0.4);background-color: rgba(89, 182, 113, 0.1);width: 100%;"> 
+         </span></td>
+         <td><span >
+          <input [readonly]="!editable" [(ngModel)]="totalDayWorkingOfFirstWeek" name="totalDayWorkingOfFirstWeek" class="input_ui" style="border:1px solid rgba(89, 182, 113, 0.4);background-color: rgba(89, 182, 113, 0.1);width: 100%;"> 
+        </span></td>
+       </tr>
+       <tr>
+        <th>Day</th>
+        <th *ngFor="let d of allDaysWithdateOfSecondWeek">{{d.day}}</th>
+        <th>TOTAL</th>
+      </tr>
+       <tr >
+         <td>Date</td>
+        <td *ngFor="let d of allDaysWithdateOfSecondWeek">{{d.date}}</td>
+      </tr>
+      <tr >
+         <td></td>
+        <td *ngFor="let d of allDaysWithdateOfSecondWeek"><span >
+          <input class="input_ui" id={{d.date}} [readonly]="!editable" style="border:1px solid rgba(89, 182, 113, 0.4);background-color: rgba(89, 182, 113, 0.1);width: 100%;"> 
+        </span></td>
+        <td><span >
+          <input class="input_ui" [(ngModel)]="totalDayWorkingOfSecondWeek" name="totalDayWorkingOfSecondWeek" [readonly]="!editable" > 
+        </span></td>
+      </tr>
+      <tr>
+        <th>Day</th>
+        <th *ngFor="let d of allDaysWithdateOfThirdWeek">{{d.day}}</th>
+        <th>TOTAL</th>
+      </tr>
+       <tr >
+         <td>Date</td>
+        <td *ngFor="let d of allDaysWithdateOfThirdWeek">{{d.date}}</td>
+      </tr>
+      <tr >
+         <td></td>
+        <td *ngFor="let d of allDaysWithdateOfThirdWeek"><span >
+          <input class="input_ui" id={{d.date}} [readonly]="!editable" style="border:1px solid rgba(89, 182, 113, 0.4);background-color: rgba(89, 182, 113, 0.1);width: 100%;"> 
+        </span></td>
+        <td><span >
+          <input class="input_ui" [(ngModel)]="totalDayWorkingOfThirdWeek" name="totalDayWorkingOfThirdWeek" [readonly]="!editable" style="border:1px solid rgba(89, 182, 113, 0.4);background-color: rgba(89, 182, 113, 0.1);width: 100%;"> 
+        </span></td>
+      </tr>
+      <tr>
+        <th>Day</th>
+        <th *ngFor="let d of allDaysWithdateOfForthWeek">{{d.day}}</th>
+        <th>TOTAL</th>
+      </tr>
+       <tr >
+         <td>Date</td>
+        <td *ngFor="let d of allDaysWithdateOfForthWeek">{{d.date}}</td>
+      </tr>
+      <tr >
+         <td></td>
+        <td *ngFor="let d of allDaysWithdateOfForthWeek"><span >
+          <input class="input_ui" id={{d.date}} [readonly]="!editable" style="border:1px solid rgba(89, 182, 113, 0.4);background-color: rgba(89, 182, 113, 0.1);width: 100%;"> 
+        </span></td>
+        <td><span >
+          <input class="input_ui" [(ngModel)]="totalDayWorkingOfFourthWeek" name="totalDayWorkingOfFourthWeek" [readonly]="!editable" style="border:1px solid rgba(89, 182, 113, 0.4);background-color: rgba(89, 182, 113, 0.1);width: 100%;"> 
+        </span></td>
+      </tr>
+      <tr>
+        <th>Day</th>
+        <th *ngFor="let d of allDaysWithdateOfFifthWeek">{{d.day}}</th>
+        <th>TOTAL</th>
+      </tr>
+       <tr >
+         <td>Date</td>
+        <td *ngFor="let d of allDaysWithdateOfFifthWeek">{{d.date}}</td>
+      </tr>
+      <tr >
+         <td></td>
+        <td *ngFor="let d of allDaysWithdateOfFifthWeek"><span >
+          <input class="input_ui" id={{d.date}} [readonly]="!editable" style="border:1px solid rgba(89, 182, 113, 0.4);background-color: rgba(89, 182, 113, 0.1);width: 100%;"> 
+        </span></td>
+        <td><span >
+          <input class="input_ui" [(ngModel)]="totalDayWorkingOfFifthWeek" name="totalDayWorkingOfFifthWeek" [readonly]="!editable" style="border:1px solid rgba(89, 182, 113, 0.4);background-color: rgba(89, 182, 113, 0.1);width: 100%;"> 
+        </span></td>
+      </tr>
+     </tbody>
+   </table>
+   <div class="forContainerRow" >
+     <div >
+      <!-- *ngIf="editable"  -->
+        <button *ngIf="editable" class="signup-button" (click)="onSendEmailClicked()">Send</button>
+     </div>
+     <span >
+      <button *ngIf="isVerfierLoggedIn" class="signup-button" (click)="onClickToVerifyClicked()">Click to Verify </button>
+     </span>
+   <span  style="margin-left: 1%;">
+    <button *ngIf="isVerfierLoggedIn"  class="signup-button" (click)="onAskToReSubmit()">Ask to re-submit </button>
+   </span>
+   </div>
+   <div  style="color:black">
+
+    <strong>H &nbsp; Holiday</strong><br>
+    <strong>P &nbsp; Personal Day Off - No Pay</strong><br>
+    <strong>V &nbsp; Vacation</strong><br>
+    <strong>S &nbsp; Sick Day</strong><br>
+    <strong>W &nbsp; Full Work Day</strong><br>
+    <strong>R &nbsp; Half Work Day</strong>
+    </div>
+</div>
+</div>
+
+

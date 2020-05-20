@@ -1,0 +1,146 @@
+
+<div id="exTab2" class="container">	
+<ul class="nav nav-tabs">
+			<li class="active">
+        <a  href="#1" data-toggle="tab">New Employee</a>
+			</li>
+			<li><a href="#2" data-toggle="tab">Experienced </a>
+			</li>
+		</ul>
+
+			<div class="tab-content ">
+			  <div class="tab-pane active" id="1">
+          <div class="container">
+            <form>
+              <div class="form-row">
+                <div class="form-group col-md-6 col-form-label">
+                  <label for="exampleFormControlFile1">DOB Proof*:</label>
+              <input type="file" class="form-control-file forinput" id="dobProof" (change)="handleFileUploadForDOB($event.target.files)">
+                </div>
+                <div class="form-group col-md-6 col-form-label">
+                  <label for="exampleFormControlFile1">Highest Education degree*:</label>
+              <input type="file" class="form-control-file forinput" id="highestEducationDegree" (change)="handleFileUploadForHED($event.target.files)">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6 col-form-label">
+                  <label for="exampleFormControlFile1">Address Proof*:</label>
+                  <input type="file" class="form-control-file forinput" id="addressProof"(change)="handleFileUploadForAddressProof($event.target.files)">  
+                </div>
+                <div class="form-group col-md-6 col-form-label">
+                  <label for="exampleFormControlFile1">Passport Copy*:</label>
+              <input type="file" class="form-control-file forinput" id="passportCopy" (change)="handleFileUploadForPasswordCopy($event.target.files)">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6 col-form-label">
+                  <label for="exampleFormControlFile1">PAN Card Copy*:</label>
+              <input type="file" class="form-control-file forinput" id="panCardCopy" (change)="handleFileUploadForPanCardCopy($event.target.files)">
+                </div>
+                <div class="form-group col-md-6 col-form-label">
+                  <label for="exampleFormControlFile1">HDFC Account Details*:</label>
+              <input type="file" class="form-control-file forinput" id="hdfcAccountDetails" (change)="handleFileUploadForHDFCAccountDetails($event.target.files)">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6 col-form-label">
+                  <label for="exampleFormControlFile1">Photograph*:</label>
+                  <input type="file" class="form-control-file forinput" id="photograph" (change)="handleFileUploadForPhotograph($event.target.files)">  
+                </div>
+                <div class="form-group col-md-6 col-form-label">
+                  <label for="exampleFormControlFile1">Adhar Card Copy*:</label>
+              <input type="file" class="form-control-file forinput" id="adharCardCopy" (change)="handleFileUploadForAdharCardCopy($event.target.files)">
+                </div>
+              </div>
+              <div class="form-row">
+                <!-- <div class="form-group col-md-6 col-form-label">
+                  <label for="inputEmail4">Email:*</label>
+                  <input type="email" class="form-control forEmail" id="email" placeholder="Enter email">
+                </div> -->
+                <div class="form-group" >
+                  <div class="col-sm-6 form-group " style="margin-top: 16px;">
+                      <a  class="nav-item signup-button" (click)="onSendEmailClicked()">Send Email</a>
+                  </div>
+                </div>
+              </div>
+           
+              <app-spinner *ngIf="loading"></app-spinner>
+            </form>
+            </div>
+				</div>
+				<div class="tab-pane" id="2">
+          <div class="container">
+            <form>
+              <div class="form-row">
+                <div class="form-group col-md-6 col-form-label">
+                  <label for="exampleFormControlFile1">DOB Proof*:</label>
+              <input type="file" class="form-control-file forinput" id="dobProof" (change)="handleFileUploadForDOB($event.target.files)">
+                </div>
+                <div class="form-group col-md-6 col-form-label">
+                  <label for="exampleFormControlFile1">Highest Education degree*:</label>
+              <input type="file" class="form-control-file forinput" id="highestEducationDegree" (change)="handleFileUploadForHED($event.target.files)">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6 col-form-label">
+                  <label for="exampleFormControlFile1">Address Proof*:</label>
+                  <input type="file" class="form-control-file forinput" id="addressProof"(change)="handleFileUploadForAddressProof($event.target.files)">  
+                </div>
+                <div class="form-group col-md-6 col-form-label">
+                  <label for="exampleFormControlFile1">Passport Copy*:</label>
+              <input type="file" class="form-control-file forinput" id="passportCopy" (change)="handleFileUploadForPasswordCopy($event.target.files)">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6 col-form-label">
+                  <label for="exampleFormControlFile1">PAN Card Copy*:</label>
+              <input type="file" class="form-control-file forinput" id="panCardCopy" (change)="handleFileUploadForPanCardCopy($event.target.files)">
+                </div>
+                <div class="form-group col-md-6 col-form-label">
+                  <label for="exampleFormControlFile1">HDFC Account Details*:</label>
+              <input type="file" class="form-control-file forinput" id="hdfcAccountDetails" (change)="handleFileUploadForHDFCAccountDetails($event.target.files)">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6 col-form-label">
+                  <label for="exampleFormControlFile1">Photograph*:</label>
+                  <input type="file" class="form-control-file forinput" id="photograph" (change)="handleFileUploadForPhotograph($event.target.files)">  
+                </div>
+                <div class="form-group col-md-6 col-form-label">
+                  <label for="exampleFormControlFile1">Adhar Card Copy*:</label>
+              <input type="file" class="form-control-file forinput" id="adharCardCopy" (change)="handleFileUploadForAdharCardCopy($event.target.files)">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6 col-form-label">
+                  <label for="exampleFormControlFile1">Last Employer Salary Slip*:</label>
+                  <input type="file" class="form-control-file forinput" id="lastEmployerSalary" (change)="handleFileUploadForEmployerSalarySlip($event.target.files)">  
+                </div>
+                <div class="form-group col-md-6 col-form-label">
+                  <label for="exampleFormControlFile1">Last Employer Appoinment letter*:</label>
+              <input type="file" class="form-control-file forinput" id="appoinmentLetter" (change)="handleFileUploadForAppoinmentLetter($event.target.files)">
+                </div>
+              </div>
+              <div class="form-row">
+                <!-- <div class="form-group col-md-6 col-form-label">
+                  <label for="inputEmail4">Email:*</label>
+                  <input type="email" class="form-control forEmail" id="email" placeholder="Enter email">
+                </div> -->
+                <div class="form-group" >
+                  <div class="col-sm-6 form-group " style="margin-top: 16px;">
+                      <a  class="nav-item signup-button" (click)="onSendEmailClickedOfExperienced()">Send Email</a>
+                  </div>
+                </div>
+              </div>
+           
+              <app-spinner *ngIf="loading"></app-spinner>
+            </form>
+            </div>
+				</div>
+			</div>
+  </div>
+    <!-- <iframe src='../../../assets/images/background_1.png' width='100%' height='100%' frameborder='0'>This is an embedded <a target='_blank' href='http://office.com'>Microsoft Office</a> document, powered by <a target='_blank' href='http://office.com/webapps'>Office Online</a>.</iframe> -->
+
+  
+
+

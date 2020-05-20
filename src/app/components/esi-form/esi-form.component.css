@@ -1,0 +1,54 @@
+
+.col-form-label{
+    color:#144582;
+  }
+.signup-button:hover{
+    border-radius: 4px;
+     background:  #fff;
+     display: inline-block;
+     font: 500 14px/16px "Roboto",sans-serif;
+     letter-spacing: .15px;
+     max-width: 100%;
+     padding: 8px 16px;
+     text-align: center;
+     white-space: nowrap;
+     /* width: 100%; */
+     box-sizing: border-box;
+     cursor: pointer;
+     transition: background-color .15s linear;
+     color: #1e88e5;
+     /* margin-left: 40%; */
+     /* margin-top: 6%; */
+     font-weight: 600;
+     
+     border: 1px solid #555555;
+     /* margin-left: auto; */
+     /* margin-top: 0.6em;
+     margin-right: 0.6em; */
+ }
+ .signup-button{
+   border-radius: 4px;
+     display: inline-block;
+     font: 500 14px/16px "Roboto",sans-serif;
+     letter-spacing: .15px;
+     max-width: 100%;
+     width: 30rem;
+     padding: 8px 16px;
+     text-align: center;
+     white-space: nowrap;
+     /* width: 100%; */
+     box-sizing: border-box;
+     cursor: pointer;
+     transition: background-color .15s linear;
+     color: #fff;
+     margin-left: 0%;
+     /* margin-top: 6%; */
+     font-weight: 600;
+     background: #fb641b;
+     box-shadow: 0 1px 2px 0 rgba(0,0,0,.2);
+     border: none;
+     color: #fff;
+     margin-top: 0.6em;
+     /* margin-right: 0.6em; */
+     margin-right: 0.6em
+ }

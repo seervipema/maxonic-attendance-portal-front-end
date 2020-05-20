@@ -1,0 +1,47 @@
+
+<div *ngIf="!isAdminLoggedIn" >
+    <a id="check_in"   class="nav-item login_button" (click)="onCheckInClicked()">Click for Check In</a>
+    <!-- <a class="form-group">
+      <input class="login_button" placeholder="Choose your timezone" list="hosting-plan" type="text">
+
+      <datalist id="hosting-plan">
+       <option value="IST"></option>
+       <option value="PST"></option>
+       <option value="EST"></option>
+       </datalist>
+      </a> -->
+    <a id="check_out"   class="nav-item right signup-button" (click)="onCheckOutClicked()">Click for Check Out</a>      
+</div>
+
+<app-spinner *ngIf="loading"></app-spinner>
+<!-- <app-dashboard></app-dashboard> -->
+<div class="forTable">
+   
+<table  *ngIf="!loading" class="table table-hover">
+  <thead>
+    <tr class="forRow">
+      <th scope="col">Date</th>
+      <th *ngIf="isAdminLoggedIn" scope="col">Email</th> 
+      <th scope="col">Check In Time</th>
+      <th scope="col">Check Out Time</th>
+      <th scope="col">Work Duration</th>
+      <th scope="col">Work Status</th>
+      <th scope="col">Check In IP</th>
+      <th scope="col">Check Out IP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor ="let one of pema">
+     
+      <td class="forTd">{{one.Date}}</td>
+      <td *ngIf="isAdminLoggedIn" class="forTd">{{one.Email}}</td>
+      <td class="forTd">{{one.check_in}}</td>
+      <td class="forTd">{{one.check_out}}</td>
+      <td class="forTd" [ngStyle]="one.h < 8 ? {'background-color':'#FFFF00','color':'black'} : {'background-color': '#006400'} ">{{one.duration}}</td>
+      <td class="forTd" [ngStyle]="one.status=='Half Day'?{'background-color':'#FFA500','color':'black'} : {'background-color': '#006400'}">{{one.status}}</td>
+      <td class="forTd" [ngStyle]="{'background-color':getColor(one.check_in_ip)}">{{one.check_in_ip}}</td>
+      <td class="forTd"  [ngStyle]="{'background-color':getColor(one.check_out_ip)}">{{one.check_out_ip}}</td>
+    </tr>
+  </tbody>
+</table>
+</div>

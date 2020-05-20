@@ -1,0 +1,128 @@
+<div  >
+  <a id="check_in" class="nav-item login_button" data-toggle="modal" data-target="#AddUser" >Add User</a>
+  <a id="check_out" class="nav-item right signup-button" data-toggle="modal" data-target="#deleteModal" >Delete User</a>
+</div>
+<div  class="modal fade" id="deleteModal" tabindex="-1" role="dialog"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Enter user email to delete</h5>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Email:</label>
+            <input [(ngModel)]="email" name="email" type="text" class="form-control" id="email" placeholder="name@maxonic.com"    (ngModelChange)="onDeleteUserEmailChanged()" >
+            <label id="deleteUserEmail" *ngIf="isDeleteUserEmailEmpty" for="message-text" class="col-form-label-confirm-password">{{deleteUserEmailResponse}}</label>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary"  (click)="onDeleteUser()">Delete User</button>
+        <app-spinner *ngIf="loading"></app-spinner>
+        <div class="col-form-label forsignUpmessage" *ngIf="isDeleteUserLoadingMessage">{{deleteUserLoadingMessage}}</div>
+      </div>  
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="AddUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLabel">Enter your details</h4>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Email:</label>
+            <input [(ngModel)]="signUpEmail" (ngModelChange)="OnEmailTextChanged()" name="signUpEmail" type="text" class="form-control" id="signUpEmail" placeholder="name@maxonic.com"  >
+            <!-- <label for="recipient-name" class="col-form-label">email is not valid</label> -->
+            <label id="SignUpPasswordEmail" *ngIf="isSignUpEmailEmpty" for="message-text" class="col-form-label-confirm-password">{{SignEmailMessage}}</label>
+
+          </div>
+          <div class="form-group ">
+            <label for="message-text" class="col-form-label">Password:</label>
+            <div class="row">
+              <div class="col-xs-10 col-sm-10" style="padding-right:0%">
+                  <input type="password" class="form-control" id="signUpPassword" name="signUpPassword" [(ngModel)]="signUpPassword" (ngModelChange)="onSignUpPasswordChanged()">
+              </div>
+              <div  class="col-xs-10 col-sm-2 forShowpassDiv" (click)="onSignUpPasswordEyeIconClick()">
+                  <div class="input-group-append">
+                      <span *ngIf="issignUpPasswordToggled" class="input-group-text" id="basic-addon2"><i class="fa fa-eye fa-lg"></i></span>
+                      <span *ngIf="!issignUpPasswordToggled" class="input-group-text" id="basic-addon2"><i class="fa fa-eye-slash fa-lg"></i></span>
+                   
+                    </div>
+              </div>
+            </div>
+             <label id="SignUpPasswordMessage" *ngIf="isSignUpPasswordEmpty" for="message-text" class="col-form-label-confirm-password">{{SignPasswordMessage}}</label>
+
+          </div>
+          <div class="form-group ">
+            <label for="message-text" class="col-form-label">Confirm Password:</label>
+            <div class="row">
+              <div class="col-xs-10 col-sm-10" style="padding-right:0%">
+                  <input type="password" [(ngModel)]="confirmPassword" name="confirmPassword" class="form-control" id="Confirmpassword" (ngModelChange)="onPasswordChanged()">
+              </div>
+              <div  class="col-xs-10 col-sm-2 forShowpassDiv" (click)="onConfirmPassEyeIconClick()">
+                  <div class="input-group-append">
+                      <span *ngIf="isSignUpConfirmPassToggled" class="input-group-text" id="basic-addon2"><i class="fa fa-eye fa-lg"></i></span>
+                      <span *ngIf="!isSignUpConfirmPassToggled" class="input-group-text" id="basic-addon2"><i class="fa fa-eye-slash fa-lg"></i></span>
+                   
+                    </div>
+              </div>
+            </div>
+            <label id="confirmPasswordMessage" *ngIf="isConfirmPasswordMatched" for="message-text" class="col-form-label-confirm-password">{{confirmPasswordMessage}}</label>
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Date of Birth:</label>
+            <input type="date" class="form-control" (ngModelChange)="OnSignUpDobChanged()" name="signUpDOB" id="signUpDOB" placeholder="dd-mm-yyyy" [(ngModel)]="signUpDOB" >
+            <!-- <label for="recipient-name" class="col-form-label">email is not valid</label> -->
+            <label id="SignUpDobMessage" *ngIf="isSignUpDOBEmpty" for="message-text" class="col-form-label-confirm-password">{{SignUpDOBMessage}}</label>
+
+           </div>
+           <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Timezone:</label>
+            <input [(ngModel)]="timezone" name="timezone" class="form-control" placeholder="Choose your timezone" list="hosting-plan" type="text" (change)="onTimezonechanged()">
+ 
+            <datalist id="hosting-plan">
+             <option value="IST"></option>
+             <option value="PST"></option>
+             <option value="EST"></option>
+             </datalist>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="onSubmitCliked()">Submit</button>
+        <app-spinner *ngIf="signUpLoading"></app-spinner>
+        <div class="col-form-label forsignUpmessage" *ngIf="signUpLoadingMessage">{{message}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <app-spinner *ngIf="loading"></app-spinner> -->
+<div class="forTable">
+ 
+<table  *ngIf="!loading" class="table table-hover">
+<thead>
+  <tr class="forRow">
+    <th scope="col">Email</th>
+    <th scope="col">Date of birth</th>
+    <th scope="col">Created On</th>
+  </tr>
+</thead>
+<tbody>
+  <tr *ngFor ="let one of allUser">
+   
+    <td class="forTd">{{one.email}}</td>
+    <td class="forTd">{{one.dob}}</td>
+    <td class="forTd">{{one.created_on}}</td>
+    </tr>
+</tbody>
+</table>
+</div>

@@ -63,7 +63,7 @@ sendEmail(email:string){
   )
 }
 check_JWT_IS_VALID(){
-  return this.http.get<any>(`${apiUrl}/attendance/JWTtokenAuthentication`).pipe(
+  return this.http.get<any>(`${apiUrl}/user/JWTtokenAuthentication`).pipe(
     map(
       result =>{
         return result;

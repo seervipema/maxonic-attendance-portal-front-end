@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {PfFormService} from '../../_services/pf-form.service';
 import {ToastrManager} from 'ng6-toastr-notifications';
+import {AdminService} from '../../_services/admin.service';
+import {AuthenticationService} from '../../_services/authentication.service';
+import { catchError } from 'rxjs/operators';
 @Component({
   selector: 'app-esi-form',
   templateUrl: './esi-form.component.html',
@@ -28,10 +31,37 @@ export class EsiFormComponent implements OnInit {
   back_account_number:string;
   IFSC_CODE:string;
   loading:boolean=false;
-  constructor(private PFService:PfFormService,private toastr:ToastrManager) { }
+  constructor(
+    private data:AdminService,
+    private authenticationService:AuthenticationService,
+    private PFService:PfFormService,private toastr:ToastrManager) { }
 
   ngOnInit() {
+    this.CheckJWTAuthentication();
   }
+    CheckJWTAuthentication(){
+    this.authenticationService.check_JWT_IS_VALID().pipe(
+      result=>{
+        return result;
+      },
+      catchError(
+        (err)=>{
+             this.toastr.errorToastr(err,"Error",{position:'bottom-right'});
+             return "";
+        }
+      )
+    ).subscribe(
+  result=>{
+    if(result["failed"]){
+        // this.authenticationService.logout();
+        // this.router.navigateByUrl('/');
+       this.data.changeMessage(false);
+    }else{
+      this.data.changeMessage(true);
+    }
+  }
+)
+}
   onSendEmailClicked(){
     if(
     this.employee_id === undefined || this.employee_id==="" || this.employee_id===null ||

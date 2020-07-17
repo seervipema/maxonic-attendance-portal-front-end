@@ -3,7 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule ,Injector} from '@angular/core';
 import {ReactiveFormsModule,FormsModule} from '@angular/forms'
 import {HttpClientModule,HTTP_INTERCEPTORS} from '@angular/common/http';
-
+import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 import {RouterModule,Routes} from '@angular/router'
 import { AppComponent } from './app.component';
 import {routing} from './app.routing'
@@ -33,6 +33,11 @@ import { SignupComponent } from './components/sign-up/sign-up.component';
 // import { ToastrModule } from 'ng6-toastr-notifications';
 import { TooltipModule } from 'ng2-tooltip-directive';
 import { ToastrModule } from 'ng6-toastr-notifications';
+import {PasswordStrengthComponent} from './components/password-strength/password-strength.component';
+import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
+import {AdminResetPasswordEmployeeComponent} from './components/admin-reset-password-employee/admin-reset-password-employee.component';
+import { NavbarBeforeLoginComponent } from './components/navbar-before-login/navbar-before-login.component';
+import { NavbarAfterLoginComponent } from './components/navbar-after-login/navbar-after-login.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +58,12 @@ import { ToastrModule } from 'ng6-toastr-notifications';
     EventCreationComponent,
     HolidaysManagementComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    PasswordStrengthComponent,
+    ForgetPasswordComponent,
+    AdminResetPasswordEmployeeComponent,
+    NavbarBeforeLoginComponent,
+    NavbarAfterLoginComponent
   ],
   imports: [
     BrowserModule, ReactiveFormsModule,
@@ -63,7 +73,9 @@ import { ToastrModule } from 'ng6-toastr-notifications';
      PdfViewerModule,
      ToastrModule.forRoot(),
      TooltipModule,
-     BrowserAnimationsModule
+     BrowserAnimationsModule,
+     PasswordStrengthMeterModule,
+     
     
     //  ToastrModule.forRoot()
   ],

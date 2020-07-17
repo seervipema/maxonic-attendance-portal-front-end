@@ -1,4 +1,4 @@
-import {Routes,RouterModule, Router} from '@angular/router';
+import {Routes,RouterModule,PreloadAllModules} from '@angular/router';
 
 import {AppComponent} from './app.component';
 import {AuthGuard} from './_guards/auth.guard';
@@ -16,7 +16,11 @@ import {EventCreationComponent} from './components/event-creation/event-creation
 import {HolidaysManagementComponent } from './components/holidays-management/holidays-management.component';
 import { LoginComponent } from './components/login/login.component';
 import {SignupComponent} from './components/sign-up/sign-up.component';
+import {ForgetPasswordComponent} from './components/forget-password/forget-password.component';
 import {HeaderAfterLoginComponent} from './components/header-after-login/header-after-login.component';
+import {AdminResetPasswordEmployeeComponent} from './components/admin-reset-password-employee/admin-reset-password-employee.component';
+import {NavbarAfterLoginComponent} from './components/navbar-after-login/navbar-after-login.component';
+import {NavbarBeforeLoginComponent} from './components/navbar-before-login/navbar-before-login.component';
 const appRoutes:Routes =[
     {
       path:'login',component:LoginComponent
@@ -49,7 +53,13 @@ const appRoutes:Routes =[
          path:'resignation',component:ResignationRequestComponent,canActivate:[AuthGuard]
     },
     {
+         path:'reset-password/:email/:token',component:ForgetPasswordComponent
+    },
+    {
          path:'reset-password',component:ResetPasswordComponent,canActivate:[AuthGuard]
+    },    
+    {
+         path:'admin-reset-password',component:AdminResetPasswordEmployeeComponent,canActivate:[AuthGuard]
     },
     {
          path:'user-management',component:UserManagementComponent,canActivate:[AuthGuard]
@@ -70,4 +80,4 @@ const appRoutes:Routes =[
         path:'**',redirectTo:'attendance'
     }
 ];
-export const routing =RouterModule.forRoot(appRoutes);
+export const routing =RouterModule.forRoot(appRoutes,{useHash:true,preloadingStrategy:PreloadAllModules});

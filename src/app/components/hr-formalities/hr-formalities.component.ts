@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {HrFormalitiesService} from '../../_services/hr-formalities.service';
 import {ToastrManager} from 'ng6-toastr-notifications';
+import { catchError } from 'rxjs/operators';
+import {AdminService} from '../../_services/admin.service';
+import {AuthenticationService} from '../../_services/authentication.service';
+
 @Component({
   selector: 'app-hr-formalities',
   templateUrl: './hr-formalities.component.html',
@@ -8,7 +12,10 @@ import {ToastrManager} from 'ng6-toastr-notifications';
 })
 export class HrFormalitiesComponent implements OnInit {
 
-  constructor(private hr:HrFormalitiesService,private toastr:ToastrManager) { }
+  constructor(private hr:HrFormalitiesService,
+    private data:AdminService,
+    private authenticationService:AuthenticationService,
+    private toastr:ToastrManager) { }
   DOBFileToUpload:File=null;
   HEDFileToUpload:File=null;
   addressProofFileToUpload:File=null;
@@ -21,7 +28,31 @@ export class HrFormalitiesComponent implements OnInit {
   employerAppoinmentLetter:File=null;
   loading:boolean=false;
   ngOnInit() {
+    this.CheckJWTAuthentication();
   }
+  CheckJWTAuthentication(){
+    this.authenticationService.check_JWT_IS_VALID().pipe(
+      result=>{
+        return result;
+      },
+      catchError(
+        (err)=>{
+             this.toastr.errorToastr(err,"Error",{position:'bottom-right'});
+             return "";
+        }
+      )
+    ).subscribe(
+  result=>{
+    if(result["failed"]){
+        // this.authenticationService.logout();
+        // this.router.navigateByUrl('/');
+       this.data.changeMessage(false);
+    }else{
+      this.data.changeMessage(true);
+    }
+  }
+)
+}
   handleFileUploadForDOB(files: FileList){
     this.DOBFileToUpload = files.item(0);
   }

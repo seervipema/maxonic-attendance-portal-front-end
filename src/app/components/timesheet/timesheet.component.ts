@@ -5,6 +5,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {PdfService} from '../../_services/pdf.service';
 import {ToastrManager} from 'ng6-toastr-notifications';
 import {TimesheetService} from '../../_services/timesheet.service';
+import { catchError } from 'rxjs/operators';
+import {AdminService} from '../../_services/admin.service';
+import {AuthenticationService} from '../../_services/authentication.service';
+
 declare var $: any;
 @Component({
   selector: 'app-timesheet',
@@ -33,12 +37,15 @@ export class TimesheetComponent implements OnInit {
   constructor(private pdfService:PdfService,  private route: ActivatedRoute,
     private router: Router,
     private toastr:ToastrManager,
-    private timesheetService:TimesheetService
+    private timesheetService:TimesheetService,
+    private data:AdminService,
+    private authenticationService:AuthenticationService
     ) {
   
    }
   
   ngOnInit() {
+    this.CheckJWTAuthentication();
     // this.allDaysWithdate=[];
     if(localStorage.getItem('email')==="paduka@maxonic.com"){
       this.isVerfierLoggedIn=true;
@@ -151,6 +158,29 @@ export class TimesheetComponent implements OnInit {
   }
 
   return arrDays;
+}
+CheckJWTAuthentication(){
+  this.authenticationService.check_JWT_IS_VALID().pipe(
+    result=>{
+      return result;
+    },
+    catchError(
+      (err)=>{
+           this.toastr.errorToastr(err,"Error",{position:'bottom-right'});
+           return "";
+      }
+    )
+  ).subscribe(
+result=>{
+  if(result["failed"]){
+      // this.authenticationService.logout();
+      // this.router.navigateByUrl('/');
+     this.data.changeMessage(false);
+  }else{
+    this.data.changeMessage(true);
+  }
+}
+)
 }
 onClickToVerifyClicked(){
   if(!localStorage.getItem('email')){

@@ -1,6 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {PfFormService} from '../../_services/pf-form.service';
 import {ToastrManager} from 'ng6-toastr-notifications'
+import { catchError } from 'rxjs/operators';
+import {AdminService} from '../../_services/admin.service';
+import {AuthenticationService} from '../../_services/authentication.service';
+
 @Component({
   selector: 'app-pf-form',
   templateUrl: './pf-form.component.html',
@@ -9,7 +13,11 @@ import {ToastrManager} from 'ng6-toastr-notifications'
 export class PfFormComponent implements OnInit {
 
 
-  constructor(private pfService:PfFormService,private toastr:ToastrManager) { }
+  constructor(private pfService:PfFormService,
+    private toastr:ToastrManager,
+    private data:AdminService,
+    private authenticationService:AuthenticationService
+    ) { }
   emp_code:string;
   complete_previous_establishment_pf_no:string;
   employee:string;
@@ -28,10 +36,33 @@ export class PfFormComponent implements OnInit {
   IFSC_CODE:string;
   loading:boolean=false;
   ngOnInit() {
-    
+    this.CheckJWTAuthentication();
   
     
   }
+  CheckJWTAuthentication(){
+    this.authenticationService.check_JWT_IS_VALID().pipe(
+      result=>{
+        return result;
+      },
+      catchError(
+        (err)=>{
+             this.toastr.errorToastr(err,"Error",{position:'bottom-right'});
+             return "";
+        }
+      )
+    ).subscribe(
+  result=>{
+    if(result["failed"]){
+        // this.authenticationService.logout();
+        // this.router.navigateByUrl('/');
+       this.data.changeMessage(false);
+    }else{
+      this.data.changeMessage(true);
+    }
+  }
+)
+}
   onSendEmailClicked(){
     if(this.emp_code===undefined || this.emp_code ==="" || this.emp_code ===null ||
     this.employee===undefined || this.employee ==="" || this.employee ===null ||

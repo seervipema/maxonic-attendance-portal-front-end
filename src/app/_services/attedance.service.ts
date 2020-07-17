@@ -34,7 +34,7 @@ export class AttedanceService {
   doCheckIn(email:string,date:string,check_in:string){
     return this.http.post<any>(`${apiUrl}/attendance/doCheckIn`,{email,date,check_in});
   }
-  doCheckOut(email:string,date:string,check_out:string){
-    return this.http.post<any>(`${apiUrl}/attendance/doCheckOut`,{email,date,check_out})
+  doCheckOut(email:string,date:string,check_out:string,taskDescription:string){
+    return this.http.post<any>(`${apiUrl}/attendance/doCheckOut`,{email,date,check_out,taskDescription})
   }
 }

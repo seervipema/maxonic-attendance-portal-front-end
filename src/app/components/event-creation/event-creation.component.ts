@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {EventsService} from '../../_services/events.service';
 import { first } from 'rxjs/operators';
 import * as moment from 'moment';
+import { catchError } from 'rxjs/operators';
+import {AdminService} from '../../_services/admin.service';
+import {AuthenticationService} from '../../_services/authentication.service';
+import {ToastrManager} from 'ng6-toastr-notifications';
 @Component({
   selector: 'app-event-creation',
   templateUrl: './event-creation.component.html',
@@ -9,7 +13,11 @@ import * as moment from 'moment';
 })
 export class EventCreationComponent implements OnInit {
 
-  constructor(private eventService:EventsService) { }
+  constructor(private eventService:EventsService,
+    private data:AdminService,
+    private toastr:ToastrManager,
+    private authenticationService:AuthenticationService
+    ) { }
   eventName:string;
   eventDate:Date;
   eventDescription:string;
@@ -24,6 +32,7 @@ export class EventCreationComponent implements OnInit {
   loading:boolean=false;
   createdEventList:any=[];
   ngOnInit() {
+    this.CheckJWTAuthentication();
     this.get_all_events();
   }
   get_all_events(){
@@ -40,6 +49,29 @@ export class EventCreationComponent implements OnInit {
       }
     })
   }
+  CheckJWTAuthentication(){
+    this.authenticationService.check_JWT_IS_VALID().pipe(
+      result=>{
+        return result;
+      },
+      catchError(
+        (err)=>{
+             this.toastr.errorToastr(err,"Error",{position:'bottom-right'});
+             return "";
+        }
+      )
+    ).subscribe(
+  result=>{
+    if(result["failed"]){
+        // this.authenticationService.logout();
+        // this.router.navigateByUrl('/');
+       this.data.changeMessage(false);
+    }else{
+      this.data.changeMessage(true);
+    }
+  }
+)
+}
   onEventNameChanged(){
      if(this.eventName){
        this.isEventNameEmpty=false;

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {AdminService} from '../../_services/admin.service';
 import { first } from 'rxjs/operators';
 import * as moment from 'moment';
+import { catchError } from 'rxjs/operators';
+import {AuthenticationService} from '../../_services/authentication.service';
+
 import {ToastrManager} from 'ng6-toastr-notifications';
 @Component({
   selector: 'app-holidays-management',
@@ -10,7 +13,9 @@ import {ToastrManager} from 'ng6-toastr-notifications';
 })
 export class HolidaysManagementComponent implements OnInit {
 
-  constructor(private adminService:AdminService,private toastr:ToastrManager) { }
+  constructor(private adminService:AdminService,
+    private authenticationService:AuthenticationService,
+    private toastr:ToastrManager) { }
   loading:boolean=false;
   holidayOccasion:string;
   isHolidayOccasionMessage:boolean=false;
@@ -31,8 +36,32 @@ export class HolidaysManagementComponent implements OnInit {
   deleteHolidayDateMessage:string="Please wait for server response ...!!!"
   allHolidayResults:any=[];
   ngOnInit() {
+    this.CheckJWTAuthentication();
   this.getting_all_holidays();
   }
+  CheckJWTAuthentication(){
+    this.authenticationService.check_JWT_IS_VALID().pipe(
+      result=>{
+        return result;
+      },
+      catchError(
+        (err)=>{
+             this.toastr.errorToastr(err,"Error",{position:'bottom-right'});
+             return "";
+        }
+      )
+    ).subscribe(
+  result=>{
+    if(result["failed"]){
+        // this.authenticationService.logout();
+        // this.router.navigateByUrl('/');
+       this.adminService.changeMessage(false);
+    }else{
+      this.adminService.changeMessage(true);
+    }
+  }
+)
+}
   getting_all_holidays(){
     this.adminService.get_all_holidays().pipe(first()).subscribe(
       result =>{

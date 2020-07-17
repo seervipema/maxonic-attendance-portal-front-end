@@ -10,8 +10,30 @@
        <option value="EST"></option>
        </datalist>
       </a> -->
-    <a id="check_out"   class="nav-item right signup-button" (click)="onCheckOutClicked()">Click for Check Out</a>      
+    <a id="check_out" data-toggle="modal" data-target="#exampleModal"   class="nav-item right signup-button">Click for Check Out</a>      
 </div>
+<div class="modal fade"  id="exampleModal" tabindex="-1" role="dialog"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+     
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="event4">Provide details about today's task:</label>
+            <textarea class="form-control" id="taskDescription" rows="3" name="taskDescription" [(ngModel)]="taskDescription" ></textarea>        
+           </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+         <button type="button" class="btn btn-primary"  (click)="onCheckOutClicked()">submit </button>
+         
+        <app-spinner *ngIf="loading1"></app-spinner>
+        </div>
+    </div>
+  </div>
+</div>
+
 
 <app-spinner *ngIf="loading"></app-spinner>
 <!-- <app-dashboard></app-dashboard> -->

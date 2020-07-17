@@ -3,30 +3,36 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" id="exampleModalLabel">Enter your details</h4>
-        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button> -->
       </div>
       <div class="modal-body">
-        <form>
+        <form [formGroup]="passwordForm">
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Email:</label>
-            <input  [(ngModel)]="signUpEmail" ngModel #signUpEmail1="ngModel" 
-            (ngModelChange)="OnEmailTextChanged(signUpEmail1)"  pattern="[a-z0-9._%+-]+@(maxonic\.com)" name="signUpEmail1" type="text"
-             class="form-control" id="signUpEmail1" placeholder="name@maxonic.com"  >
-            <!-- <label for="recipient-name" class="col-form-label">email is not valid</label> -->
+            <!-- [(ngModel)]="signUpEmail"(ngModelChange)="OnEmailTextChanged(signUpEmail1)" ngModel #signUpEmail1="ngModel" 
+              pattern="[a-z0-9._%+-]+@(maxonic\.com)" -->
+            <input formControlName="signUpEmail"  name="signUpEmail1" type="text"
+              class="form-control" id="signUpEmail1" placeholder="name@maxonic.com"  >
             <label id="SignUpPasswordEmail" *ngIf="isSignUpEmailEmpty" for="message-text" class="col-form-label-confirm-password">{{SignEmailMessage}}</label>
-            <div *ngIf="signUpEmail1.errors &&(signUpEmail1.touched || signUpEmail1.dirty)" class ="aler alert-danger">
+            <!-- <div *ngIf="signUpEmail1.errors &&(signUpEmail1.touched || signUpEmail1.dirty)" class ="aler alert-danger">
               <div [hidden]="!signUpEmail1.errors?.pattern">
                 Invalid pattern email should be name@maxonic.com type
               </div> 
-             </div>
-          </div>
+             </div> -->
+             <div *ngIf="signUpEmail.errors"  class ="aler alert-danger"> 
+              <div *ngIf="signUpEmail.errors.required">
+                 Email required.
+              </div> 		   
+              <div *ngIf="signUpEmail.errors.pattern">
+                Invalid pattern. Email should be name@maxonic.com type
+              </div> 
+           </div> 
+            </div>
           <div class="form-group ">
             <label for="message-text" class="col-form-label">Password:</label>
             <div class="row">
               <div class="col-xs-10 col-sm-10" style="padding-right:0%">
-                  <input type="password" class="form-control" id="signUpPassword" name="signUpPassword" [(ngModel)]="signUpPassword" (ngModelChange)="onSignUpPasswordChanged()">
+                <!-- [(ngModel)]="signUpPassword" (ngModelChange)="onSignUpPasswordChanged()" -->
+                  <input type="password" formControlName="signUpPassword" class="form-control" id="signUpPassword" name="signUpPassword" >
               </div>
               <div  class="col-xs-10 col-sm-2 forShowpassDiv" (click)="onSignUpPasswordEyeIconClick()">
                   <div class="input-group-append">
@@ -36,14 +42,24 @@
                     </div>
               </div>
             </div>
-             <label id="SignUpPasswordMessage" *ngIf="isSignUpPasswordEmpty" for="message-text" class="col-form-label-confirm-password">{{SignPasswordMessage}}</label>
-
+             <!-- <label id="SignUpPasswordMessage" *ngIf="isSignUpPasswordEmpty" for="message-text" class="col-form-label-confirm-password">{{SignPasswordMessage}}</label> -->
+             <!-- <password-strength-meter [password]="signUpPassword"  [enableFeedback]="true" (strengthChange)="displayStrength($event)"></password-strength-meter> -->
+             <label >Your password must be 6 or more characters long,
+              contain at least one uppercase letter,
+              at least one lowercase letter,
+              at least one number,
+              and at least one special character</label>
+             <app-password-strength
+             [passwordToCheck]="passwordForm.value.signUpPassword"
+             (passwordStrength)="passwordValid($event)"
+             ></app-password-strength>
           </div>
           <div class="form-group ">
             <label for="message-text" class="col-form-label">Confirm Password:</label>
             <div class="row">
               <div class="col-xs-10 col-sm-10" style="padding-right:0%">
-                  <input type="password" [(ngModel)]="confirmPassword" name="confirmPassword" class="form-control" id="Confirmpassword" (ngModelChange)="onPasswordChanged()">
+                <!-- [(ngModel)]="confirmPassword" (ngModelChange)="onPasswordChanged()" -->
+                  <input type="password"  formControlName="confirmPassword"  name="confirmPassword" class="form-control" id="Confirmpassword" > 
               </div>
               <div  class="col-xs-10 col-sm-2 forShowpassDiv" (click)="onConfirmPassEyeIconClick()">
                   <div class="input-group-append">
@@ -57,14 +73,15 @@
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Date of Birth:</label>
-            <input type="date" class="form-control" (ngModelChange)="OnSignUpDobChanged()" name="signUpDOB" id="signUpDOB" placeholder="dd-mm-yyyy" [(ngModel)]="signUpDOB" >
-            <!-- <label for="recipient-name" class="col-form-label">email is not valid</label> -->
+            <!-- (ngModelChange)="OnSignUpDobChanged()" [(ngModel)]="signUpDOB" -->
+            <input type="date" formControlName="signUpDOB" class="form-control" name="signUpDOB" id="signUpDOB" placeholder="dd-mm-yyyy"  >
             <label id="SignUpDobMessage" *ngIf="isSignUpDOBEmpty" for="message-text" class="col-form-label-confirm-password">{{SignUpDOBMessage}}</label>
 
            </div>
            <div class="form-group">
             <label for="recipient-name" class="col-form-label">Timezone:</label>
-            <input [(ngModel)]="timezone" name="timezone" class="form-control" placeholder="Choose your timezone" list="hosting-plan" type="text" (change)="onTimezonechanged()">
+            <!-- [(ngModel)]="timezone"(change)="onTimezonechanged()" -->
+            <input id="timezone" formControlName="timezone" name="timezone" class="form-control" placeholder="Choose your timezone" list="hosting-plan" type="text">
  
             <datalist id="hosting-plan">
              <option value="IST"></option>
@@ -76,12 +93,11 @@
       </div>
       <div class="modal-footer">
         <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-        <span tooltip="Before clicking Send Email you should write your email than proceed" placement="top">
-        <button type="button" class="btn btn-primary" (click)="onSubmitCliked()">Submit</button></span>
+        <span tooltip="Before clicking,ensure you have filled all the details." placement="top">
+        <button type="button" class="btn btn-primary" (click)="onSubmitCliked()" [disabled]="!isSignUpButtonAlreadyClicked">Submit</button></span>
         <app-spinner *ngIf="signUpLoading"></app-spinner>
         <div class="col-form-label forsignUpmessage" *ngIf="signUpLoadingMessage">{{message}}</div>
       </div>
     </div>
   </div>
 </div>
-

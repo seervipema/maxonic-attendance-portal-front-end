@@ -28,5 +28,14 @@ export class UserService {
       }
     )
   }
+  reset_password(email:string,token:string,password:string){
+     return this.http.post(`${apiUrl}/email/reset-password`,{email,token,password});
+  }
+  reset_password_after_login(email:string,password:string,new_password:string){
+    return this.http.post(`${apiUrl}/user/reset-password`,{email,password,new_password});
+  }
+  admin_reset_password_for_employee(email:string,admin:string){
+    return this.http.post(`${apiUrl}/user/admin/reset`,{email,admin});
+  }
 
 }

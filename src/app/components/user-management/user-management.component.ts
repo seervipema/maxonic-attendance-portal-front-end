@@ -4,6 +4,9 @@ import { first } from 'rxjs/operators';
 import {AuthenticationService} from '../../_services/authentication.service';
 import {ToastrManager} from 'ng6-toastr-notifications';
 declare var $: any;
+import { catchError } from 'rxjs/operators';
+import {AdminService} from '../../_services/admin.service';
+
 @Component({
   selector: 'app-user-management',
   templateUrl: './user-management.component.html',
@@ -13,7 +16,9 @@ export class UserManagementComponent implements OnInit {
   loading:boolean=false;
   allUser:any=[];
   constructor(private userService:UserService,private authenticationService:AuthenticationService,
-    private toastr:ToastrManager
+    private toastr:ToastrManager,
+    private data:AdminService,
+
     
     ) { }
   isDeleteUserLoadingMessage:boolean=false;
@@ -43,12 +48,36 @@ export class UserManagementComponent implements OnInit {
   converted_timezone:string;
 
   ngOnInit() {
+    this.CheckJWTAuthentication();
     this.userService.get_all_users().pipe(first()).subscribe(
       result=>{
         this.allUser= result["result"]
       }
     )
   }
+  CheckJWTAuthentication(){
+    this.authenticationService.check_JWT_IS_VALID().pipe(
+      result=>{
+        return result;
+      },
+      catchError(
+        (err)=>{
+             this.toastr.errorToastr(err,"Error",{position:'bottom-right'});
+             return "";
+        }
+      )
+    ).subscribe(
+  result=>{
+    if(result["failed"]){
+        // this.authenticationService.logout();
+        // this.router.navigateByUrl('/');
+       this.data.changeMessage(false);
+    }else{
+      this.data.changeMessage(true);
+    }
+  }
+)
+}
   onTimezonechanged(){
     console.log("timezone",this.timezone);
     if(this.timezone==="IST"){
